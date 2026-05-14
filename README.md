@@ -12,15 +12,19 @@ Part of the [SEIF Protocol](https://seifprotocol.com) provenance plane — give 
 
 ## Quick start
 
-### Claude Code
+Install via the Vercel skills CLI (works across Claude Code, Cursor, Codex CLI, Gemini CLI, and 18+ other agents — `SKILL.md` is cross-agent):
 
 ```bash
-npx skills add seif-provenance
+npx skills add and2carvalho/seif-skills
 ```
 
-### Cursor
+To pin a specific skill from this repo:
 
-Settings → Skills → Install `seif-provenance`.
+```bash
+npx skills add and2carvalho/seif-skills --skill seif-provenance
+```
+
+> Name-only resolution (`npx skills add seif-provenance`) requires publication to the [skills.sh](https://skills.sh) directory — planned for v0.1.1. Until then, use the `owner/repo` form above; it installs directly from this GitHub repo, no registry needed.
 
 Then set your API key:
 

@@ -26,15 +26,17 @@ When an AI assistant writes code, there's no trail tying that specific diff to t
 
 ## Install
 
-### Claude Code
+Install via the Vercel skills CLI (cross-agent — same command for Claude Code, Cursor, Codex CLI, Gemini CLI, and 18+ others; `SKILL.md` is the cross-agent standard):
 
 ```bash
-npx skills add seif-provenance
+npx skills add and2carvalho/seif-skills --skill seif-provenance
 ```
 
-### Cursor
+The CLI auto-detects your agent and drops the skill in the right place:
+- **Claude Code** → reads at session start.
+- **Cursor** → drops in `.cursor/skills/seif-provenance/`; reload the window to pick it up.
 
-Settings → Skills → Install `seif-provenance`.
+> Name-only resolution (`npx skills add seif-provenance`) requires publication to the [skills.sh](https://skills.sh) directory — planned for v0.1.1.
 
 ## First sign
 
