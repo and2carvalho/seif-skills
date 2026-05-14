@@ -1,0 +1,7 @@
+diff --git a/hello.py b/hello.py
+index 0000000..abcd123 100644
+--- a/hello.py
++++ b/hello.py
+@@ -0,0 +1,2 @@
++def hello():
++    return "world"
