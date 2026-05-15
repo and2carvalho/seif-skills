@@ -1,0 +1,42 @@
+# D6 SKILL.md contract conformance tests
+#
+# Runs the seif-protocol-contract client/skill test suite against this repo's
+# SKILL.md on every PR + push to main. Pins to a specific contract commit
+# (the repo's authoritative wire-protocol surface) so spec churn doesn't
+# silently break the consumer CI signal.
+#
+# When contract spec evolves, bump the pinned SHA below — meta-tests in this
+# CI will surface drift before users see it.
+#
+# Local repro:
+#   pip install pytest "seif-protocol-contract @ git+https://github.com/and2carvalho/seif-protocol-contract.git@<sha>"
+#   SEIF_SKILL_PATH=skills/seif-provenance/SKILL.md \
+#     pytest --pyargs seif_protocol_contract.tests.client.skill -v
+name: D6 SKILL.md contract
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  skill-md-contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pytest + contract package (pinned)
+        run: |
+          python -m pip install --upgrade pip
+          # Pin = latest contract main as of s103. Bump alongside spec churn.
+          pip install pytest 'seif-protocol-contract @ git+https://github.com/and2carvalho/seif-protocol-contract.git@d6366cbf9e5cf677025bb0e3c64c158e5634c456'
+
+      - name: Run SKILL.md contract conformance tests
+        env:
+          SEIF_SKILL_PATH: ${{ github.workspace }}/skills/seif-provenance/SKILL.md
+        run: |
+          pytest --pyargs seif_protocol_contract.tests.client.skill -v
